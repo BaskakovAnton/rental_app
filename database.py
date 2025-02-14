@@ -226,6 +226,14 @@ def get_rental_summary(conn, date):
         print(f"Ошибка при получении сводки: {e}")
         return 0
 
+def close_connection(conn):
+    """Закрывает соединение с базой данных."""
+    try:
+        if conn:
+            conn.close()
+    except sqlite3.Error as e:
+        print(f"Ошибка при закрытии соединения: {e}")
+
 if __name__ == '__main__':
     conn = create_connection()
     if conn:
