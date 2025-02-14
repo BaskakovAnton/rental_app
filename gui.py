@@ -4,13 +4,13 @@ from tkinter import messagebox
 import database as db
 from bikes_tab import BikesTab
 from customers_tab import CustomersTab
-# from rentals_tab import RentalsTab  # TODO: Создать
+from rentals_tab import RentalsTab  # ADD THIS LINE
 # from summary_tab import SummaryTab  # TODO: Создать
 
 class RentalApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Приложение для управления прокатом велотехники")
+        self.root.title("Приложение для управления прокатом велотехники(прототип)")
 
         self.conn = db.create_connection()
         # Ensure tables are created
@@ -38,7 +38,7 @@ class RentalApp:
         # Инициализация вкладок
         self.bikes_tab_instance = BikesTab(self, self.bikes_tab)  # Pass self (RentalApp instance)
         self.customers_tab_instance = CustomersTab(self, self.customers_tab)  # Pass self
-        # self.rentals_tab_instance = RentalsTab(self, self.rentals_tab)  # TODO: Создать
+        self.rentals_tab_instance = RentalsTab(self, self.rentals_tab)  # ADD THIS LINE
         # self.summary_tab_instance = SummaryTab(self, self.summary_tab)  # TODO: Создать
 
         # Кнопка "Выход"

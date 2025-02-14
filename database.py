@@ -210,6 +210,17 @@ def delete_rental(conn, rental_id):
     except sqlite3.Error as e:
         print(f"Ошибка при удалении аренды: {e}")
 
+def select_rental_by_id(conn, rental_id):
+    """Получает запись об аренде по ID."""
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM rentals WHERE id = ?", (rental_id,))
+        row = cursor.fetchone()
+        return row
+    except sqlite3.Error as e:
+        print(f"Ошибка при выборке данных: {e}")
+        return None
+
 def get_rental_summary(conn, date):
     """Получает сводку по арендам за определенную дату."""
     sql = """
@@ -233,12 +244,3 @@ def close_connection(conn):
             conn.close()
     except sqlite3.Error as e:
         print(f"Ошибка при закрытии соединения: {e}")
-
-if __name__ == '__main__':
-    conn = create_connection()
-    if conn:
-        create_tables(conn)
-        conn.close()
-        print("База данных и таблицы успешно созданы (если их не было).")
-    else:
-        print("Не удалось создать подключение к базе данных.")
